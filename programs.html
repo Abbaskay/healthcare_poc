@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Programs - Healthcare360.in</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .program-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="py-4 shadow-sm bg-white">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="https://placehold.co/50x50/3b82f6/ffffff?text=H360" alt="Healthcare360.in Logo" class="w-10 h-10 rounded-full shadow-md">
+                <h1 class="text-2xl font-bold text-blue-700">Healthcare360</h1>
+            </div>
+            <nav class="flex space-x-8">
+                <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                <a href="{{ url_for('programs') }}" class="text-blue-600 font-medium">Programs</a>
+                <a href="{{ url_for('specialists') }}" class="text-gray-700 hover:text-blue-600 font-medium">Specialists</a>
+                <a href="{{ url_for('contact') }}" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Health Education Programs</h1>
+            <p class="text-xl text-gray-600">Stay informed and empowered with our comprehensive health education initiatives</p>
+        </div>
+
+        <!-- Program Categories -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Educational Webinars</h3>
+                <p class="text-gray-600 text-sm">Online sessions covering various health topics with expert speakers</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Community Workshops</h3>
+                <p class="text-gray-600 text-sm">Hands-on learning sessions in local communities</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3.5"></path>
+                </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Awareness Campaigns</h3>
+                <p class="text-gray-600 text-sm">Public health initiatives and awareness programs</p>
+            </div>
+        </div>
+
+        <!-- Current Programs -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Current & Upcoming Programs</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for program in health_programs %}
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold 
+                                {% if program.status == 'Current Session' %}bg-blue-100 text-blue-800
+                                {% elif program.status == 'Upcoming' %}bg-green-100 text-green-800
+                                {% else %}bg-purple-100 text-purple-800{% endif %}">
+                                {{ program.status }}
+                            </span>
+                            <span class="text-sm text-gray-500">{{ program.duration }}</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">{{ program.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ program.type }}</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                {{ program.date }}
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ program.time }} IST
+                            </div>
+                        </div>
+                        
+                        <button class="w-full btn-primary">
+                            {% if program.status == 'Current Session' %}
+                                Join Now
+                            {% elif program.status == 'Upcoming' %}
+                                Register
+                            {% else %}
+                                Learn More
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Program Calendar -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Program Calendar</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Program</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Type</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Time</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for program in health_programs %}
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="py-3 px-4 text-gray-700">{{ program.date }}</td>
+                            <td class="py-3 px-4 font-medium text-gray-800">{{ program.title }}</td>
+                            <td class="py-3 px-4 text-gray-600">{{ program.type }}</td>
+                            <td class="py-3 px-4 text-gray-600">{{ program.time }} IST</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 rounded-full text-xs font-semibold 
+                                    {% if program.status == 'Current Session' %}bg-blue-100 text-blue-800
+                                    {% elif program.status == 'Upcoming' %}bg-green-100 text-green-800
+                                    {% else %}bg-purple-100 text-purple-800{% endif %}">
+                                    {{ program.status }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">
+                                    {% if program.status == 'Current Session' %}
+                                        Join
+                                    {% elif program.status == 'Upcoming' %}
+                                        Register
+                                    {% else %}
+                                        View
+                                    {% endif %}
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated with Our Programs</h2>
+            <p class="text-xl mb-6 opacity-90">Get notified about new health education programs and workshops</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <input type="email" placeholder="Enter your email address" 
+                       class="px-4 py-3 rounded-lg text-gray-800 flex-1 max-w-md">
+                <button class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container text-center text-sm">
+            <p>&copy; 2025 Healthcare360.in. All rights reserved.</p>
+            <p class="mt-2">
+                <a href="#" class="hover:underline">Privacy Policy</a> |
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

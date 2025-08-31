@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare360.in - Community Medical Support</title>
+    <!-- Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for base styles and overrides */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #334155; /* Darker text */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header specific styles */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        nav a {
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #2563eb; /* Blue 600 */
+        }
+
+        /* Section styling */
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb; /* Blue 600 */
+        }
+
+        /* Mobile navigation toggle */
+        @media (max-width: 767px) {
+            .mobile-menu-hidden {
+                display: none;
+            }
+        }
+
+        /* Flash messages */
+        .flash-message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+        }
+
+        .flash-success {
+            background-color: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .flash-error {
+            background-color: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="py-4 shadow-sm">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Logo -->
+                <img src="https://placehold.co/50x50/3b82f6/ffffff?text=H360" alt="Healthcare360.in Logo" class="w-10 h-10 rounded-full shadow-md">
+                <h1 class="text-2xl font-bold text-blue-700">Healthcare360</h1>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Navigation -->
+            <nav id="main-nav" class="mobile-menu-hidden md:flex md:space-x-8">
+                <a href="#educational" class="text-gray-700 hover:text-blue-600 font-medium">Educational</a>
+                <a href="#preventive" class="text-gray-700 hover:text-blue-600 font-medium">Preventive</a>
+                <a href="#curative" class="text-gray-700 hover:text-blue-600 font-medium">Curative</a>
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+                <a href="{{ url_for('contact') }}" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container py-4">
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="container py-8">
+        <!-- City Selection -->
+        <section class="mb-8 p-6 bg-white rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 md:mb-0">Serving Your Community</h2>
+            <div class="flex items-center space-x-2">
+                <label for="city-select" class="text-gray-600">Select your city:</label>
+                <select id="city-select" class="p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    {% for city in cities %}
+                        <option value="{{ city.id }}">{{ city.name }}, {{ city.state }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 md:mt-0 md:ml-4">
+                (Note: Content currently static, future updates will provide city-specific information.)
+            </p>
+        </section>
+
+        <!-- Educational Section -->
+        <section id="educational" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Educational Support</h2>
+            <p class="text-gray-700 mb-4">
+                Empowering you with knowledge about health and well-being. Our educational resources are designed to help you understand your body, common illnesses, and healthy lifestyle choices.
+            </p>
+            <img src="https://placehold.co/600x250/a7f3d0/10b981?text=Knowledge+is+Health" alt="People learning about health" class="w-full h-auto rounded-lg mb-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Understanding Common Diseases</h3>
+                    <p class="text-sm text-gray-600">Learn about symptoms, causes, and basic management of prevalent conditions like diabetes, hypertension, and seasonal infections.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Nutrition & Healthy Eating</h3>
+                    <p class="text-sm text-gray-600">Guidelines for balanced diets, local food benefits, and tips for maintaining a healthy weight.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Hygiene & Sanitation</h3>
+                    <p class="text-sm text-gray-600">Essential practices for personal and community hygiene to prevent the spread of diseases.</p>
+                </div>
+            </div>
+            <a href="#" class="btn-primary inline-block mt-6">Explore Educational Resources</a>
+        </section>
+
+        <!-- Preventive Section -->
+        <section id="preventive" class="section-card">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Preventive Care</h2>
+            <p class="text-gray-700 mb-4">
+                Prevention is better than cure. This section provides actionable advice and resources to help you stay healthy and avoid illness.
+            </p>
+            <img src="https://placehold.co/600x250/d1fae5/059669?text=Healthy+Lifestyle" alt="People exercising and eating healthy" class="w-full h-auto rounded-lg mb-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Regular Health Check-ups & Vaccinations</h3>
+                    <p class="text-sm text-gray-600">Information on recommended schedules and the importance of routine screenings and immunizations.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Mental Well-being & Stress Management</h3>
+                    <p class="text-sm text-gray-600">Tips for maintaining mental health, coping with stress, and finding support.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Safe Water & Food Practices</h3>
+                    <p class="text-sm text-gray-600">Guidance on ensuring safe drinking water and hygienic food preparation to prevent water-borne diseases.</p>
+                </div>
+                <!-- Organic Food and Gardening Section -->
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Organic Food & Gardening</h3>
+                    <p class="text-sm text-gray-600">Discover the benefits of organic food and learn how to start your own home garden for fresh, healthy produce. Our support expert is available for guidance.</p>
+                    <p class="text-sm text-gray-500 mt-2">Support Expert: Available</p>
+                    <img src="https://placehold.co/300x150/dcfce7/15803d?text=Organic+Garden" alt="Organic vegetables in a garden" class="w-full h-auto rounded-lg mt-4">
+                </div>
+            </div>
+            <a href="#" class="btn-primary inline-block mt-6 bg-green-600 hover:bg-green-700">Learn About Prevention</a>
+        </section>
+
+        <!-- Curative Section -->
+        <section id="curative" class="section-card">
+            <h2 class="text-3xl font-bold text-red-700 mb-4">Curative Support</h2>
+            <p class="text-gray-700 mb-4">
+                When you need medical attention, this section guides you on initial steps and how to access professional help in your area.
+            </p>
+            <img src="https://placehold.co/600x250/fee2e2/dc2626?text=Medical+Care" alt="Doctor consulting a patient" class="w-full h-auto rounded-lg mb-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">First Aid Basics</h3>
+                    <p class="text-sm text-gray-600">Simple instructions for common injuries and emergencies before professional help arrives.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Local Healthcare Directory</h3>
+                    <p class="text-sm text-gray-600">Find hospitals, clinics, pharmacies, and emergency services in Lucknow, Raebareli, and Noida.</p>
+                </div>
+                <!-- General Consultation & Specialist Referrals -->
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50 col-span-full">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">General Consultation & Specialist Referrals</h3>
+                    <p class="text-sm text-gray-600 mb-2">
+                        Our general practitioners are available for consultation two days a week to address your common health concerns and provide initial assessments.
+                        If specialized care is required, they will refer you to our panel of experienced specialist doctors.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-700 mt-3">Specialist Areas:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-600">
+                        {% for specialist in specialists %}
+                            <li>{{ specialist.area }} <span class="text-gray-500">({{ specialist.doctors }}: {{ specialist.status }})</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Educational Health Program Dashboard -->
+                <div class="p-4 border border-gray-200 rounded-lg bg-gray-50 col-span-full">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Educational Health Program Dashboard</h3>
+                    <p class="text-sm text-gray-600 mb-2">
+                        Stay updated on our educational health programs! This dashboard provides information on current sessions, upcoming workshops, and health awareness campaigns for this week.
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-gray-600 mt-3">
+                        {% for program in health_programs %}
+                            <li><strong>{{ program.status }}:</strong> "{{ program.title }}" - {{ program.type }}, {{ program.date }}, {{ program.time }} IST</li>
+                        {% endfor %}
+                        <li><a href="{{ url_for('programs') }}" class="text-blue-600 hover:underline">View Full Program Schedule</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-red-600 font-semibold mt-4">
+                Disclaimer: This information is for general guidance only and is not a substitute for professional medical advice. Always consult a qualified doctor for diagnosis and treatment.
+            </p>
+            <a href="#" class="btn-primary inline-block mt-6 bg-red-600 hover:bg-red-700">Find Medical Help</a>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
+            <p class="text-gray-700 mb-4">
+                Our mission is to provide accessible and reliable health information and support to communities across India. We believe that informed communities are healthier communities.
+            </p>
+            <p class="text-gray-700">
+                Starting with Lucknow, Raebareli, and Noida, we aim to expand our reach, offering localized health resources and fostering a proactive approach to well-being.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container text-center text-sm">
+            <p>&copy; 2025 Healthcare360.in. All rights reserved.</p>
+            <p class="mt-2">
+                <a href="#" class="hover:underline">Privacy Policy</a> |
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mainNav = document.getElementById('main-nav');
+
+            if (mobileMenuButton && mainNav) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mainNav.classList.toggle('mobile-menu-hidden');
+                    mainNav.classList.toggle('flex-col'); // Make it column layout for mobile
+                    mainNav.classList.toggle('space-y-4'); // Add vertical spacing
+                    mainNav.classList.toggle('absolute'); // Position absolutely
+                    mainNav.classList.toggle('top-16'); // Below header
+                    mainNav.classList.toggle('left-0');
+                    mainNav.classList.toggle('w-full');
+                    mainNav.classList.toggle('bg-white');
+                    mainNav.classList.toggle('p-4');
+                    mainNav.classList.toggle('shadow-lg');
+                    mainNav.classList.toggle('z-10');
+                });
+
+                // Close mobile menu when a link is clicked
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (!mainNav.classList.contains('mobile-menu-hidden')) {
+                            mobileMenuButton.click(); // Simulate click to close
+                        }
+                    });
+                });
+            }
+
+            // City selection logic
+            const citySelect = document.getElementById('city-select');
+            if (citySelect) {
+                citySelect.addEventListener('change', (event) => {
+                    const selectedCity = event.target.value;
+                    console.log(`Selected city: ${selectedCity}`);
+                    // In a real application, you would fetch and display city-specific content here.
+                    // For now, this just logs the selection.
+                });
+            }
+        });
+    </script>
+</body>
+</html>
